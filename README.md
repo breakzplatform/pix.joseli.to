@@ -3,6 +3,7 @@
 **Apoie com Pix** · **Support with Pix**
 
 Se algo que eu fiz te ajudou, um Pix de qualquer valor ajuda a manter os projetos no ar.
+
 If something I made helped you, a Pix of any amount helps keep the projects running.
 
 <img src="qr.svg" alt="Pix QR code for apoie@pix.joseli.to" width="280">
