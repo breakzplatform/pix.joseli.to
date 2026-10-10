@@ -5,7 +5,7 @@
   </picture>
 </a>
 
-<br>
+&nbsp;
 
 Se algo que eu fiz te ajudou, um Pix de qualquer valor ajuda a manter os projetos no ar.
 
@@ -48,7 +48,3 @@ apoie@pix.joseli.to
     <img src="sponsors.svg" width="380" alt="GitHub Sponsors">
   </picture>
 </a>
-
----
-
-[pix.joseli.to](https://pix.joseli.to) · [joseli.to](https://joseli.to)
