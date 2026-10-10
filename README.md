@@ -1,7 +1,7 @@
 <a href="https://pix.joseli.to">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="header-dark.svg">
-    <img src="header.svg" width="100%" alt="Apoie via Pix">
+    <img src="header.svg" width="100%" alt="pix.joseli.to">
   </picture>
 </a>
 
