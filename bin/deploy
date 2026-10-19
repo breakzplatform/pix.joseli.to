@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+"""Deploy site/index.html as the Cloudflare Worker "pix" on pix.joseli.to/*.
+
+The page and the link preview image (site/og.png, base64) are inlined in the
+Worker (no assets binding), with the headers from site/_headers. Needs
+CLOUDFLARE_API_TOKEN in the environment (Workers Scripts and Workers
+Routes write). Run build.py first.
+"""
+import base64
+import json
+import os
+import re
+import urllib.request
+import uuid
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+ACCOUNT = "9f1bef1c20ee0e7c092a3dd77f23bf97"
+ZONE = "c4b49657066562ac81c52f4da7f61ff4"
+PATTERN = "pix.joseli.to/*"
+
+
+def token() -> str:
+    value = os.environ.get("CLOUDFLARE_API_TOKEN", "").strip()
+    if not value:
+        raise SystemExit("deploy: CLOUDFLARE_API_TOKEN is not set")
+    return value
+
+
+def api(method: str, path: str, data: bytes, content_type: str) -> dict:
+    request = urllib.request.Request(
+        f"https://api.cloudflare.com/client/v4{path}", data=data, method=method,
+        headers={"Authorization": f"Bearer {token()}", "Content-Type": content_type},
+    )
+    with urllib.request.urlopen(request, timeout=30) as response:
+        return json.load(response)
+
+
+def worker_source() -> str:
+    html = (ROOT / "site/index.html").read_text()
+    headers = {"content-type": "text/html; charset=utf-8"}
+    for line in (ROOT / "site/_headers").read_text().splitlines():
+        match = re.match(r"\s+([A-Za-z-]+):\s*(.+)$", line)
+        if match:
+            headers[match.group(1).lower()] = match.group(2).strip()
+    image = base64.b64encode((ROOT / "site/og.png").read_bytes()).decode("ascii")
+    image_headers = {"content-type": "image/png", "cache-control": headers.get("cache-control", "public, max-age=3600")}
+    return (
+        f"const HTML = {json.dumps(html)};\n"
+        f"const HEADERS = {json.dumps(headers)};\n"
+        f"const OG_PNG = Uint8Array.from(atob({json.dumps(image)}), (c) => c.charCodeAt(0));\n"
+        f"const OG_HEADERS = {json.dumps(image_headers)};\n"
+        "export default { async fetch(request) {\n"
+        "  const url = new URL(request.url);\n"
+        "  if (url.pathname === '/og.png') return new Response(OG_PNG, { headers: OG_HEADERS });\n"
+        "  if (url.pathname !== '/' && url.pathname !== '/index.html') return Response.redirect(url.origin + '/', 301);\n"
+        "  return new Response(HTML, { headers: HEADERS });\n"
+        "} };\n"
+    )
+
+
+def main() -> None:
+    boundary = uuid.uuid4().hex
+    metadata = json.dumps({"main_module": "index.js", "compatibility_date": "2026-09-01"})
+    body = (
+        f"--{boundary}\r\nContent-Disposition: form-data; name=\"metadata\"\r\n"
+        f"Content-Type: application/json\r\n\r\n{metadata}\r\n"
+        f"--{boundary}\r\nContent-Disposition: form-data; name=\"index.js\"; filename=\"index.js\"\r\n"
+        f"Content-Type: application/javascript+module\r\n\r\n{worker_source()}\r\n--{boundary}--\r\n"
+    ).encode()
+    result = api("PUT", f"/accounts/{ACCOUNT}/workers/scripts/pix", body, f"multipart/form-data; boundary={boundary}")
+    print("worker:", "ok" if result["success"] else result["errors"])
+    routes = api("GET", f"/zones/{ZONE}/workers/routes", None, "application/json")["result"]
+    if not any(route["pattern"] == PATTERN for route in routes):
+        payload = json.dumps({"pattern": PATTERN, "script": "pix"}).encode()
+        print("route:", api("POST", f"/zones/{ZONE}/workers/routes", payload, "application/json")["success"])
+
+
+if __name__ == "__main__":
+    main()

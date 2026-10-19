@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src {{SCRIPT_HASHES}}; font-src https://static.joseli.to; img-src data:; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>Apoie via Pix · Joselito</title>
+  <meta name="description" content="Apoie o trabalho do Joselito com Pix, Buy Me a Coffee ou GitHub Sponsors.">
+  <meta property="og:title" content="Apoie via Pix · Joselito">
+  <meta property="og:description" content="Pix, Buy Me a Coffee ou GitHub Sponsors.">
+  <meta property="og:url" content="https://pix.joseli.to/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:image" content="https://pix.joseli.to/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="pix.joseli.to — apoie via Pix, com o QR code Pix da página">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Apoie via Pix · Joselito">
+  <meta name="twitter:description" content="Pix, Buy Me a Coffee ou GitHub Sponsors.">
+  <meta name="twitter:image" content="https://pix.joseli.to/og.png">
+  <link rel="canonical" href="https://pix.joseli.to/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2332BCAD'/%3E%3Cpath d='M8 3l5 5-5 5-5-5z' fill='%23fff'/%3E%3C/svg%3E">
+  <style>
+    /* A trimmed copy of the joseli.to design system v2 tokens ("retícula"):
+       warm paper, CMU Serif 700 display, 2px rules, a halftone dot shadow,
+       no radius. Values come from the system's tokens/colors.json; every colour
+       has a light, dark and terminal value. The project ink is the official Pix
+       teal (#32BCAD) in light, a deeper teal (#1A7A70) under white text in
+       dark; terminal is monochrome amber, inks included.
+       The theme is MANUAL: light by default, dark or terminal only when picked
+       with the switch, stored per device. No prefers-color-scheme. */
+    @font-face{font-family:"CMU Serif";font-weight:700;font-display:swap;src:url("https://static.joseli.to/assets/fonts/cmu-serif-700-roman.woff2") format("woff2")}
+    @font-face{font-family:"CMU Sans Serif";font-weight:400;font-display:swap;src:url("https://static.joseli.to/assets/fonts/cmu-sans-serif-500-roman.woff2") format("woff2")}
+    @font-face{font-family:"CMU Sans Serif";font-weight:700;font-display:swap;src:url("https://static.joseli.to/assets/fonts/cmu-sans-serif-700-roman.woff2") format("woff2")}
+    @font-face{font-family:"CMU Typewriter Text";font-weight:400;font-display:swap;src:url("https://static.joseli.to/assets/fonts/cmu-typewriter-text-500-roman.woff2") format("woff2")}
+    @font-face{font-family:"CMU Typewriter Text";font-weight:700;font-display:swap;src:url("https://static.joseli.to/assets/fonts/cmu-typewriter-text-700-roman.woff2") format("woff2")}
+
+    :root {
+      color-scheme: light;
+      --surface-page: #F4F1EA;
+      --surface-card: #FBF9F4;
+      --surface-sunken: #EAE6DC;
+      --text-1: #111111;
+      --text-2: #3A3A3A;
+      --text-3: #5A5650;
+      --text-inverse: #FFFFFF;
+      --link: #0000EE;
+      --link-visited: #7A2E6B;
+      --link-active: #9E1200;
+      --border-strong: #111111;
+      --shadow-color: #111111;
+      --focus-ring: #0000EE;
+      --ink-pix: #32BCAD;
+      --on-pix: #000000;
+      --ink-sponsors: #FFB3D6;
+      --on-sponsors: #000000;
+      --ink-yellow: #FFD500;
+      --on-yellow: #000000;
+      --status-ok: #1B5E20;
+      --on-ok: #FFFFFF;
+      --status-error: #9E1200;
+      --on-error: #FFFFFF;
+    }
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --surface-page: #15130F;
+      --surface-card: #1F1C17;
+      --surface-sunken: #0E0C09;
+      --text-1: #D9CFB9;
+      --text-2: #AFA590;
+      --text-3: #908777;
+      --text-inverse: #15130F;
+      --link: #7996DB;
+      --link-visited: #C775AE;
+      --link-active: #D37B69;
+      --border-strong: #897F70;
+      --shadow-color: #847968;
+      --focus-ring: #7996DB;
+      --ink-pix: #1A7A70;
+      --on-pix: #FFFFFF;
+      --ink-sponsors: #C3859C;
+      --on-sponsors: #000000;
+      --ink-yellow: #AD9000;
+      --on-yellow: #000000;
+      --status-ok: #44A55E;
+      --on-ok: #000000;
+      --status-error: #D37B69;
+      --on-error: #000000;
+    }
+    :root[data-theme="terminal"] {
+      color-scheme: dark;
+      --surface-page: #000000;
+      --surface-card: #000000;
+      --surface-sunken: #0D0B06;
+      --text-1: #FFB000;
+      --text-2: #D89A18;
+      --text-3: #A9761A;
+      --text-inverse: #000000;
+      --link: #FFD54A;
+      --link-visited: #C0873A;
+      --link-active: #FF6A00;
+      --border-strong: #FFB000;
+      --shadow-color: #A9761A;
+      --focus-ring: #FFD54A;
+      --ink-pix: #FFB000;
+      --on-pix: #000000;
+      --ink-sponsors: #FF8A1F;
+      --on-sponsors: #000000;
+      --ink-yellow: #FFD54A;
+      --on-yellow: #000000;
+      --status-ok: #FFB000;
+      --on-ok: #000000;
+      --status-error: #FF6A00;
+      --on-error: #000000;
+      --qr-paper: #FFB000;
+    }
+    :root {
+      --project-ink: var(--ink-pix); --project-ink-contrast: var(--on-pix);
+      --qr-paper: #FFFFFF;
+      --border: 2px solid var(--border-strong);
+      --dot-pitch: 4px; --dot-radius: 1.5px;
+      --shadow-offset: 6px; --shadow-offset-hover: 9px; --press-travel: 2px;
+      --font-display: "CMU Serif", Georgia, serif;
+      --font-body: "CMU Sans Serif", system-ui, sans-serif;
+      --font-mono: "CMU Typewriter Text", ui-monospace, Menlo, monospace;
+    }
+    @media (max-width: 600px) { :root { --dot-pitch: 6px; --shadow-offset: 5px; } }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; background: var(--surface-page); }
+    body {
+      margin: 0; background: var(--surface-page); color: var(--text-1);
+      font: 400 17px/1.55 var(--font-body);
+    }
+    a { color: var(--link); text-decoration-thickness: 2px; text-underline-offset: .12em; }
+    a:visited { color: var(--link-visited); }
+    a:active { color: var(--link-active); }
+    a:not(.btn):hover { background: var(--link); color: var(--text-inverse); text-decoration: none; }
+    :focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 1px; }
+    button { font: inherit; color: inherit; border-radius: 0; }
+
+    /* The halftone shadow: a dot field behind the block, offset 6px (5px on
+       phones). Hover lifts the block 2px and opens the shadow to 9px; press
+       slams it flat. Anything that casts needs an opaque fill. */
+    .cast { position: relative; isolation: isolate; border: var(--border); background-color: var(--surface-card); }
+    .cast::after {
+      content: ""; position: absolute; inset: -2px; z-index: -2; pointer-events: none;
+      transform: translate(var(--shadow-offset), var(--shadow-offset));
+      background: radial-gradient(circle at 50% 50%, var(--shadow-color) var(--dot-radius), transparent calc(var(--dot-radius) + .5px)) 0 0 / var(--dot-pitch) var(--dot-pitch);
+    }
+    .cast::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: inherit; }
+    @media (max-resolution: 1.49dppx) {
+      .cast::after { background-image: conic-gradient(from 270deg at 2px 2px, var(--shadow-color) 25%, transparent 0); }
+    }
+    .press, .press::after { transition: transform 70ms cubic-bezier(.2, .8, .2, 1); }
+    .press:hover { transform: translate(calc(var(--press-travel) * -1), calc(var(--press-travel) * -1)); }
+    .press:hover::after { transform: translate(var(--shadow-offset-hover), var(--shadow-offset-hover)); }
+    .press:active { transform: translate(var(--press-travel), var(--press-travel)); }
+    .press:active::after { transform: none; background: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .press, .press::after { transition: none; }
+      .press:hover { transform: none; }
+      .press:hover::after { transform: translate(var(--shadow-offset), var(--shadow-offset)); }
+    }
+
+    .visually-hidden {
+      position: absolute; width: 1px; height: 1px; overflow: hidden;
+      clip: rect(0 0 0 0); white-space: nowrap;
+    }
+
+    .page { max-width: 30rem; margin: 0 auto; padding: 16px 16px 48px; }
+    .themes { display: flex; justify-content: flex-end; gap: 8px; }
+    .themes[hidden] { display: none; }
+    .themes .btn { min-height: 0; padding: 4px 7px; font: 700 11.5px/1.2 var(--font-body); background: var(--surface-page); color: var(--text-1); }
+    /* The theme button shows the icon of the theme a tap goes to. */
+    .theme-button .icon { display: none; }
+    .theme-button:not([data-next-theme]) .icon-moon,
+    .theme-button[data-next-theme="dark"] .icon-moon,
+    .theme-button[data-next-theme="terminal"] .icon-terminal,
+    .theme-button[data-next-theme="light"] .icon-sun { display: inline-block; }
+    h1 {
+      margin: 28px 0 8px; text-align: center; white-space: nowrap;
+      font: 700 clamp(32px, 11vw, 56px)/1.1 var(--font-display); letter-spacing: -.02em;
+    }
+    /* The ink block tilts -2deg, like a sticker. Only the block tilts. */
+    h1 span {
+      display: inline-block; line-height: .92; padding: .06em .12em .1em;
+      background: var(--project-ink); color: var(--project-ink-contrast);
+      transform: rotate(-2deg);
+    }
+    /* The official Pix mark (symbol + logotype) replaces the word. It takes the
+       block's contrast colour: black on teal (monochrome positive), white on
+       the dark teal (negative), black on amber in terminal. Never stretched. */
+    h1 span { padding: .12em .16em; vertical-align: -.08em; }
+    .pix-logo { display: block; height: .62em; width: auto; }
+    .lede { margin: 0 0 32px; text-align: center; color: var(--text-2); }
+
+    .panel { margin-bottom: 32px; }
+    .panel h2 {
+      margin: 0; padding: 7px 10px; border-bottom: var(--border);
+      background: var(--project-ink); color: var(--project-ink-contrast);
+      font: 700 12.5px/1.3 var(--font-mono); text-transform: uppercase; letter-spacing: .08em;
+    }
+    .panel-body { padding: 16px; }
+
+    /* The QR keeps black modules on a light paper in every theme: white in
+       light and dark, amber in terminal. Dark-on-light is what every banking
+       app scans; an inverted (amber-on-black) code is not. */
+    .qr-paper { max-width: 15rem; margin: 0 auto 14px; padding: 12px; background: var(--qr-paper); border-color: #111111; forced-color-adjust: none; }
+    .qr { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; color: #000; background: var(--qr-paper); }
+    .hint { margin: 0 0 16px; text-align: center; font-size: 15px; color: var(--text-2); }
+
+    .label {
+      display: block; margin: 16px 0 4px;
+      font: 700 11.5px/1.3 var(--font-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--text-3);
+    }
+    .copy-row { display: flex; align-items: stretch; gap: 10px; }
+    .value {
+      flex: 1; min-width: 0; margin: 0; padding: 8px 10px;
+      border: var(--border); background: var(--surface-sunken); color: var(--text-1);
+      font: 400 15px/1.4 var(--font-mono); overflow-wrap: anywhere; user-select: all;
+    }
+    .value-code { font-size: 12.5px; max-height: 6.5em; overflow-y: auto; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 44px; padding: 8px 14px; cursor: pointer;
+      background: var(--project-ink); color: var(--project-ink-contrast); border-color: var(--project-ink);
+      font: 700 15px/1.2 var(--font-body); text-decoration: none;
+    }
+    .themes .btn { border-color: var(--border-strong); }
+    /* The copy button is exactly as tall as its box, one line or four: the
+       row stretches and the button follows, so the pair reads as one unit. */
+    .copy-row .btn { flex: none; align-self: stretch; min-height: 0; }
+
+    .others { display: grid; gap: 18px; }
+    a.btn-sponsors, a.btn-sponsors:visited { background: var(--ink-sponsors); color: var(--on-sponsors); border-color: var(--ink-sponsors); }
+    a.btn-coffee, a.btn-coffee:visited { background: var(--ink-yellow); color: var(--on-yellow); border-color: var(--ink-yellow); }
+    .others .btn { width: 100%; min-height: 52px; font-size: 17px; }
+
+    /* Copy feedback is the system's toast, fixed above the bottom edge so it
+       takes no room in the flow. The live region stays in the tree while
+       idle (only faded out), so screen readers still announce each message. */
+    .toast {
+      position: fixed; left: 50%; bottom: 24px; z-index: 10;
+      display: flex; align-items: stretch; width: max-content; max-width: calc(100% - 32px);
+      opacity: 0; pointer-events: none; transform: translate(-50%, 8px);
+      transition: opacity 120ms ease-out, transform 120ms ease-out;
+      --ink: var(--status-ok); --on-ink: var(--on-ok);
+    }
+    .toast[data-tone="error"] { --ink: var(--status-error); --on-ink: var(--on-error); }
+    .toast.is-shown { opacity: 1; transform: translate(-50%, 0); }
+    .toast .spine {
+      display: flex; align-items: center; padding: 8px 9px;
+      background: var(--ink); color: var(--on-ink); border-right: var(--border);
+      font: 700 11.5px/1.3 var(--font-mono); text-transform: uppercase; letter-spacing: .08em;
+    }
+    .toast p { margin: 0; padding: 8px 12px; font: 400 14px/1.4 var(--font-mono); color: var(--text-1); }
+    @media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+
+  </style>
+  <script>
+    try { var saved = localStorage.getItem("theme"); if (saved === "dark" || saved === "terminal") document.documentElement.setAttribute("data-theme", saved); } catch (error) {}
+  </script>
+</head>
+<body>
+  <div class="page">
+    <div class="themes" hidden>
+      <!-- One button cycles claro -> escuro -> terminal. It names the NEXT
+           theme (label and icon); aria-label states both sides. -->
+      <button type="button" class="btn cast press theme-button" data-cycle-theme aria-label="Tema: claro, toque para escuro">
+        <svg class="icon icon-sun" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="icon icon-moon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+        <svg class="icon icon-terminal" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M12 19h8"/><path d="m4 17 6-6-6-6"/></svg>
+        <span data-theme-label>escuro</span>
+      </button>
+    </div>
+    <header>
+      <h1>Apoie via <span>{{PIX_LOGO}}</span></h1>
+      <p class="lede">
+        Se algo que eu fiz te ajudou, um Pix de qualquer valor ajuda a manter os projetos no ar.
+        
+      </p>
+    </header>
+
+    <main>
+      <section class="panel cast" aria-labelledby="pix-title">
+        <h2 id="pix-title">Pix</h2>
+        <div class="panel-body">
+          <div class="qr-paper cast">{{QR_SVG}}</div>
+          <p class="hint">
+            Aponte a câmera do app do banco. O valor fica a seu critério.
+            
+          </p>
+
+          <span class="label" id="key-label">Chave Pix (e-mail)</span>
+          <div class="copy-row">
+            <p class="value" id="pix-key" aria-labelledby="key-label">{{KEY}}</p>
+            <button type="button" class="btn cast press" data-copy="pix-key" hidden>
+              Copiar
+            </button>
+          </div>
+
+          <span class="label" id="code-label">Pix copia e cola</span>
+          <div class="copy-row">
+            <p class="value value-code" id="pix-code" aria-labelledby="code-label" tabindex="0">{{PAYLOAD}}</p>
+            <button type="button" class="btn cast press" data-copy="pix-code" hidden>
+              Copiar
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="panel cast" aria-labelledby="others-title">
+        <h2 id="others-title">Outras formas</h2>
+        <div class="panel-body others">
+          <a class="btn btn-coffee cast press" href="https://buymeacoffee.com/joselito" rel="noopener">Buy Me a Coffee</a>
+          <a class="btn btn-sponsors cast press" href="https://github.com/sponsors/breakzplatform" rel="noopener">GitHub Sponsors</a>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast cast" data-toast>
+      <span class="spine" aria-hidden="true" data-toast-tone>ok</span>
+      <p role="status" aria-live="polite" id="status"></p>
+    </div>
+
+  </div>
+
+  <script>
+    (() => {
+      // Theme: one button cycles light -> dark -> terminal, manual only,
+      // stored per device; storage may be unavailable.
+      const root = document.documentElement;
+      const themes = ["light", "dark", "terminal"];
+      const themeNames = { light: "claro", dark: "escuro", terminal: "terminal" };
+      const themeButton = document.querySelector("[data-cycle-theme]");
+      const currentTheme = () => (themes.includes(root.getAttribute("data-theme")) ? root.getAttribute("data-theme") : "light");
+      const nextTheme = () => themes[(themes.indexOf(currentTheme()) + 1) % themes.length];
+      const syncTheme = () => {
+        themeButton.dataset.nextTheme = nextTheme();
+        themeButton.setAttribute("aria-label", `Tema: ${themeNames[currentTheme()]}, toque para ${themeNames[nextTheme()]}`);
+        themeButton.querySelector("[data-theme-label]").textContent = themeNames[nextTheme()];
+      };
+      themeButton.addEventListener("click", () => {
+        const theme = nextTheme();
+        if (theme === "light") root.removeAttribute("data-theme");
+        else root.setAttribute("data-theme", theme);
+        try { localStorage.setItem("theme", theme); } catch {}
+        syncTheme();
+      });
+      syncTheme();
+
+      const toast = document.querySelector("[data-toast]");
+      const status = document.getElementById("status");
+      const messages = {
+        copied: { text: "Copiado.", tone: "ok", spine: "ok", duration: 2500 },
+        failed: { text: "Não deu para copiar. Selecione o texto e copie à mão.", tone: "error", spine: "erro", duration: 6000 },
+      };
+      let hideTimer;
+      const say = (key) => {
+        const message = messages[key];
+        clearTimeout(hideTimer);
+        // Clearing first makes a repeated message count as a change, so it is announced again.
+        status.textContent = "";
+        toast.dataset.tone = message.tone;
+        toast.querySelector("[data-toast-tone]").textContent = message.spine;
+        requestAnimationFrame(() => {
+          status.textContent = message.text;
+          toast.classList.add("is-shown");
+        });
+        hideTimer = setTimeout(() => {
+          toast.classList.remove("is-shown");
+          hideTimer = setTimeout(() => { status.textContent = ""; }, 200);
+        }, message.duration);
+      };
+
+      const copy = async (text) => {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return;
+        }
+        const area = document.createElement("textarea");
+        area.value = text; area.setAttribute("readonly", ""); area.style.position = "fixed"; area.style.opacity = "0";
+        document.body.append(area); area.select();
+        const copied = document.execCommand("copy");
+        area.remove();
+        if (!copied) throw new Error("copy failed");
+      };
+      for (const button of document.querySelectorAll("[data-copy]")) {
+        button.addEventListener("click", async () => {
+          const text = document.getElementById(button.dataset.copy).textContent.trim();
+          try { await copy(text); say("copied"); } catch { say("failed"); }
+        });
+      }
+
+      for (const element of document.querySelectorAll("[hidden]")) element.hidden = false;
+    })();
+  </script>
+</body>
+</html>
