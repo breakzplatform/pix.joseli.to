@@ -1,7 +1,7 @@
 <a href="https://pix.joseli.to">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="header-dark.svg">
-    <img src="header.svg" width="100%" alt="pix.joseli.to">
+    <source media="(prefers-color-scheme: dark)" srcset=".github/readme/header-dark.svg">
+    <img src=".github/readme/header.svg" width="100%" alt="pix.joseli.to">
   </picture>
 </a>
 
@@ -14,8 +14,8 @@ Se algo que eu fiz te ajudou, um Pix de qualquer valor ajuda a manter os projeto
 ## Pix
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="qr-dark.svg">
-  <img src="qr.svg" width="280" alt="QR Code Pix para apoie@pix.joseli.to · Pix QR code for apoie@pix.joseli.to">
+  <source media="(prefers-color-scheme: dark)" srcset=".github/readme/qr-dark.svg">
+  <img src=".github/readme/qr.svg" width="280" alt="QR Code Pix para apoie@pix.joseli.to · Pix QR code for apoie@pix.joseli.to">
 </picture>
 
 Aponte a câmera do app do banco. O valor fica a seu critério.<br>
@@ -37,14 +37,14 @@ apoie@pix.joseli.to
 
 <a href="https://buymeacoffee.com/joselito">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="coffee-dark.svg">
-    <img src="coffee.svg" width="380" alt="Buy Me a Coffee">
+    <source media="(prefers-color-scheme: dark)" srcset=".github/readme/coffee-dark.svg">
+    <img src=".github/readme/coffee.svg" width="380" alt="Buy Me a Coffee">
   </picture>
 </a>
 <br>
 <a href="https://github.com/sponsors/breakzplatform">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="sponsors-dark.svg">
-    <img src="sponsors.svg" width="380" alt="GitHub Sponsors">
+    <source media="(prefers-color-scheme: dark)" srcset=".github/readme/sponsors-dark.svg">
+    <img src=".github/readme/sponsors.svg" width="380" alt="GitHub Sponsors">
   </picture>
 </a>
